@@ -26,7 +26,7 @@ const MoviesPage = () => {
          navigate(`?query=${query.trim()}`);
 
 
-    }, [query]);
+    }, [query, navigate]);
 
     const handleSubmit = newQuery => {
         setQuery(newQuery.trim());
