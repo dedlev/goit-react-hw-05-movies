@@ -31,6 +31,8 @@ const MovieDetails = () => {
             } 
         }
         fetchData(movieId)
+
+        
      
     }, [movieId])
 

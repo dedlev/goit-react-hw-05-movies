@@ -17,17 +17,19 @@ const MoviesPage = () => {
             try {
                 const data = await getSearchQuery(query);
                 setMovies(data.results);
+                
             } catch (error) {
                 console.log(error);
             }
         }
         fetchData(query);
+         navigate(`?query=${query.trim()}`);
+
 
     }, [query]);
 
     const handleSubmit = newQuery => {
         setQuery(newQuery.trim());
-         navigate(`?query=${newQuery.trim()}`);
     };
 
     return (
@@ -46,4 +48,5 @@ const MoviesPage = () => {
 };
 
 export default MoviesPage;
+
 
