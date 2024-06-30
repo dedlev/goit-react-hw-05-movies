@@ -53,7 +53,7 @@ const MovieDetails = () => {
     };
 
     return (
-        <>
+        <main>
             <Button onClick={handleGoBack}>
                 <GoArrowLeft />
                 Go back
@@ -98,7 +98,7 @@ const MovieDetails = () => {
             </ul>
             <hr />
             <Outlet />
-        </>
+        </main>
     );
 };
 
