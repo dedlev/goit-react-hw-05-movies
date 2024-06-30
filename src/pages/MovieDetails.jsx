@@ -199,6 +199,7 @@ import { GoArrowLeft } from "react-icons/go";
 import { getMovieDetails } from "services/movies.services";
 import { List, Wrapper } from "./MovieDetailsstyled";
 import { STATUS } from "../constants/status.constants";
+import { Button } from "./MovieDetailsstyled";
 
 const MovieDetails = () => {
     const [poster_path, setPoster_path] = useState('');
@@ -242,15 +243,15 @@ const MovieDetails = () => {
     }, [movieId]);
 
     const handleGoBack = () => {
-        navigate(location || -1);
+        navigate(location);
     };
 
     return (
         <>
-            <button onClick={handleGoBack}>
+            <Button onClick={handleGoBack}>
                 <GoArrowLeft />
                 Go back
-            </button>
+            </Button>
             {status === STATUS.LOADING && <p>Loading...</p>}
             {status === STATUS.ERROR && <p>Error loading data</p>}
             {status === STATUS.SUCCESS && (
@@ -282,7 +283,8 @@ const MovieDetails = () => {
             <p>Additional information</p>
             <ul>
                 <li>
-                    <Link to="credits">Cast</Link>
+                    <Link to="cast">Cast</Link>
+                    {/* <Link to="credits">Cast</Link> */}
                 </li>
                 <li>
                     <Link to="reviews">Reviews</Link>
