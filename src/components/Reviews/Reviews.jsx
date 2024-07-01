@@ -17,9 +17,8 @@ const Reviews = () => {
 
             try{
         const data =  await getReviews(movieId, 'reviews');
-        setReviews(data.results);
-        setStatus(STATUS.SUCCESS);
-
+                setReviews(data.results);
+                setStatus(STATUS.SUCCESS);
             } catch (error) {
                 setStatus(STATUS.ERROR);
                 console.log(error);
@@ -35,14 +34,20 @@ const Reviews = () => {
             {status === STATUS.LOADING && <Loader />}
             {status === STATUS.ERROR && <p>Error loading data</p>}
             {status === STATUS.SUCCESS && (
-                <ul>
-                    {reviews.map(review => (
-                        <li key={review.id}>
-                            <p>Author: {review.author}</p>
-                            <p>{review.content}</p>
-                        </li>
-                    ))}
-                </ul>
+                <>
+                    {reviews.length === 0 ? (
+                        <p>No reviews found</p>
+                    ) : (
+                        <ul>
+                            {reviews.map(review => (
+                                <li key={review.id}>
+                                    <p>Author: {review.author}</p>
+                                    <p>{review.content}</p>
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                </>    
             )}
         </main>
       
