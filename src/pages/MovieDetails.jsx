@@ -1,11 +1,12 @@
 
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { Link, Outlet, useLocation, useNavigate, useParams, } from "react-router-dom";
 import { GoArrowLeft } from "react-icons/go";
 import { getMovieDetails } from "services/movies.services";
 import { List, Wrapper } from "./MovieDetailsstyled";
 import { STATUS } from "../constants/status.constants";
 import { Button } from "./MovieDetailsstyled";
+import { Loader } from "ui/Loader";
 
 const MovieDetails = () => {
     const [poster_path, setPoster_path] = useState('');
@@ -53,7 +54,6 @@ const MovieDetails = () => {
                 <GoArrowLeft />
                 Go back
             </Button>
-            {status === STATUS.LOADING && <p>Loading...</p>}
             {status === STATUS.ERROR && <p>Error loading data</p>}
             {status === STATUS.SUCCESS && (
                 <Wrapper>
@@ -91,7 +91,9 @@ const MovieDetails = () => {
                 </li>
             </ul>
             <hr />
-            <Outlet />
+            <Suspense fallback={status === STATUS.LOADING && <Loader />}>
+                <Outlet />
+            </Suspense>
         </main>
     );
 };
