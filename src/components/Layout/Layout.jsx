@@ -2,7 +2,6 @@ import React, { Suspense, useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import { Container, Header, Link } from './Layoutstyled'
 import { Loader } from 'ui/Loader';
-import { STATUS } from 'constants/status.constants';
 
 export const Layout = () => {
   
