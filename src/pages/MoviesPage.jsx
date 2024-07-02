@@ -11,6 +11,7 @@ const MoviesPage = () => {
     const [query, setQuery] = useState('');
     const [movies, setMovies] = useState([]);
     const [status, setStatus] = useState(STATUS.IDLE);
+
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -64,7 +65,7 @@ const MoviesPage = () => {
                 <ul>
                     {movies && movies.map(movie => (
                         <li key={movie.id}>
-                            <Link to={`/movies/${movie.id}?query=${query}`}>{movie.title}</Link>
+                            <Link to={`/movies/${movie.id}?query=${query}`} state={{from: location}}>{movie.title}</Link>
                         </li>
                     ))}
                 </ul>

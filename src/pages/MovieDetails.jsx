@@ -1,6 +1,6 @@
 
-import { useEffect, useState } from "react";
-import { Link, Outlet, useNavigate, useParams } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { Link, Outlet, useLocation, useNavigate, useParams, } from "react-router-dom";
 import { GoArrowLeft } from "react-icons/go";
 import { getMovieDetails } from "services/movies.services";
 import { List, Wrapper } from "./MovieDetailsstyled";
@@ -17,16 +17,11 @@ const MovieDetails = () => {
     const [status, setStatus] = useState(STATUS.IDLE);
 
     const { movieId } = useParams();
+
     const navigate = useNavigate();
-    const [location, setLocation] = useState('');
-
-    useEffect(() => {
-        const storedLocation = localStorage.getItem('location');
-        if (storedLocation) {
-            setLocation(storedLocation);
-        }
-    }, []);
-
+    const location = useLocation();
+    const goBackRef = useRef(location.state?.from ?? '/movies');
+    
     useEffect(() => {
         const fetchData = async () => {
             setStatus(STATUS.LOADING);
@@ -49,7 +44,7 @@ const MovieDetails = () => {
     }, [movieId]);
 
     const handleGoBack = () => {
-        navigate(location);
+        navigate(goBackRef.current);
     };
 
     return (
@@ -90,7 +85,6 @@ const MovieDetails = () => {
             <ul>
                 <li>
                     <Link to="cast">Cast</Link>
-                    {/* <Link to="credits">Cast</Link> */}
                 </li>
                 <li>
                     <Link to="reviews">Reviews</Link>

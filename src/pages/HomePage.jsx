@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import { Link} from 'react-router-dom';
+import { Link, useLocation} from 'react-router-dom';
 import { getMovies } from 'services/movies.services';
 import { STATUS } from "../constants/status.constants";
 
@@ -11,6 +11,7 @@ const HomePage = () => {
     const [movies, setMovies] = useState([]);
     const [status, setStatus] = useState(STATUS.IDLE);
 
+    const location = useLocation();
 
  useEffect(() => {
      localStorage.setItem('location', '/');
@@ -39,7 +40,7 @@ const HomePage = () => {
             {status === STATUS.ERROR && <p>Error loading data</p>}
             {status === STATUS.SUCCESS && movies.map(movie => (
                 <li key={movie.id}>
-                    <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
+                    <Link to={`/movies/${movie.id}`} state={{from: location}}>{movie.title}</Link>
                 </li>
             ))}
         </main>
