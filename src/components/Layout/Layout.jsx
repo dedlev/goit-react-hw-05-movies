@@ -5,7 +5,7 @@ import { Loader } from 'ui/Loader';
 import { STATUS } from 'constants/status.constants';
 
 export const Layout = () => {
-    const [status, setStatus] = useState(STATUS.IDLE);
+  
   return (
     <Container>
        <Header>
